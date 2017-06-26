@@ -18,9 +18,13 @@ public class SshApplication {
 		SSHClient client = new SSHClient("10.200.133.6", username, password);
 		SSHSession session = client.openSession();
 
-		session.upload(FileList.PRODUCT_ZIP, "/usr/local/service");
-		session.upload(FileList.FINANCE_ZIP, "/usr/local/service");
-		System.out.println("ok");
+		session.upload(FileUtil.PRODUCT_ZIP, "/usr/local/service");
+		session.upload(FileUtil.FINANCE_ZIP, "/usr/local/service");
+		System.out.println("upload ok");
+
+		FileUtil.execFromClasspath("dubbo-product.sh", session);
+		FileUtil.execFromClasspath("dubbo-finance.sh", session);
+		System.out.println("startup ok");
 	}
 
 	static void upload_8() throws JSchException, Exception {
@@ -29,14 +33,20 @@ public class SshApplication {
 		SSHClient client = new SSHClient("10.200.133.8", username, password);
 		SSHSession session = client.openSession();
 
-		session.upload(FileList.MQNOTIFY_ZIP, "/usr/local/service");
-		session.upload(FileList.TRANSACTION_ZIP, "/usr/local/service");
-		session.upload(FileList.TRANSACTION_DISTRIBUTED_ZIP, "/usr/local/service");
-		session.upload(FileList.MESSAGE_ZIP, "/usr/local/service");
-		session.upload(FileList.MESSAGE_FAILOVER_ZIP, "/usr/local/service");
-		session.upload(FileList.QUARTZ_ZIP, "/usr/local/service");
-		session.upload(FileList.REPORT_ZIP, "/usr/local/service");
-		System.out.println("ok");
+		session.upload(FileUtil.MQNOTIFY_ZIP, "/usr/local/service");
+		// session.upload(FileUtil.TRANSACTION_ZIP, "/usr/local/service");
+		session.upload(FileUtil.TRANSACTION_DISTRIBUTED_ZIP, "/usr/local/service");
+		// session.upload(FileUtil.MESSAGE_ZIP, "/usr/local/service");
+		// session.upload(FileUtil.MESSAGE_FAILOVER_ZIP, "/usr/local/service");
+		session.upload(FileUtil.QUARTZ_ZIP, "/usr/local/service");
+		session.upload(FileUtil.REPORT_ZIP, "/usr/local/service");
+		System.out.println("upload ok");
+
+		FileUtil.execFromClasspath("dubbo-mqnotify.sh", session);
+		FileUtil.execFromClasspath("dubbo-quartz.sh", session);
+		FileUtil.execFromClasspath("dubbo-report.sh", session);
+		FileUtil.execFromClasspath("dubbo-transaction-distributed.sh", session);
+		System.out.println("startup ok");
 	}
 
 }
