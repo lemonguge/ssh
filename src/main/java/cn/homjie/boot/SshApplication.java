@@ -24,7 +24,6 @@ public class SshApplication {
 
 		FileUtil.execFromClasspath("dubbo-product.sh", session);
 		FileUtil.execFromClasspath("dubbo-finance.sh", session);
-		System.out.println("startup ok");
 	}
 
 	static void upload_8() throws JSchException, Exception {
@@ -46,7 +45,6 @@ public class SshApplication {
 		FileUtil.execFromClasspath("dubbo-quartz.sh", session);
 		FileUtil.execFromClasspath("dubbo-report.sh", session);
 		FileUtil.execFromClasspath("dubbo-transaction-distributed.sh", session);
-		System.out.println("startup ok");
 	}
 
 }
